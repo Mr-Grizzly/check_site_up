@@ -19,10 +19,9 @@ if len(sys.argv) > 1:
 else:
 	quit("###ERROR: No url input was given.")
 
-# Check Website Up #
+# Get Website Response #
 command = f"ping {url} -c 1"
 output = os.popen(command).read()
-
 
 if "packets transmitted, " in output and "packets received, " in output:
 	siteIsUp = True
@@ -34,11 +33,9 @@ else:
 with open(logFile_PATH, 'a+') as logFile:
 	current_time = time.strftime('%x - %X')
 	if siteIsUp:
-		writeString = (f"\n{current_time} | {url} | online")
+		logFile.write(f"\n{current_time} | {url} | online")
 	else:
-		writeString = (f"\n{current_time} | {url} | NOT DETECTED / OFFLINE")
-
-	logFile.write(writeString)
+		logFile.write(f"\n{current_time} | {url} | NOT DETECTED / OFFLINE")
 
 # Download Json Count File Data #
 with open(jsonFile_PATH) as jsonFile:
@@ -50,7 +47,7 @@ if url in DATA:
 	if siteIsUp:
 		DATA[url]["up"] += 1
 
-elif url not in DATA:
+else:
 	DATA[url] = {"checks": 1}
 	if siteIsUp:
 		DATA[url]["up"] = 1
