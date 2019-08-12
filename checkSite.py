@@ -4,8 +4,9 @@ import json
 import time
 
 # Settings #
-jsonFile_PATH = "record.json"
-logFile_PATH = "siteCheck.log"
+container_path = '/'.join(os.path.realpath(__file__).split('/')[:-1]) + '/'
+jsonFile_PATH = container_path + "record.json"
+logFile_PATH = container_path + "siteCheck.log"
 
 '''
 	JSON structure:
